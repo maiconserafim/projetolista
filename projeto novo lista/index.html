@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <style>
+    /* Estilos CSS */
+    /* Define estilos básicos para todos os elementos */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        outline: none;
+    }
+    
+    /* Define o plano de fundo do corpo da página */
+    body {
+        background: linear-gradient(to bottom, #0099cc, #003366);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    /* Estiliza o contêiner principal */
+    .container {
+        background-color: #ffffff;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 15px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Estiliza a caixa de entrada de texto */
+    .input-task {
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        height: 50px;
+        padding: 10px;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    
+    /* Estiliza o botão de adicionar tarefa */
+    .button-add-task {
+        border: none;
+        border-radius: 5px;
+        height: 50px;
+        background-color: #003366;
+        color: #ffffff;
+        font-size: 20px;
+        width: 100%;
+        cursor: pointer;
+        font-weight: 700;
+        transition: background-color 0.3s;
+    }
+    
+    .button-add-task:hover {
+        background-color: #005599;
+    }
+    
+    .button-add-task:active {
+        background-color: #001f33;
+    }
+    
+    /* Estiliza a lista de tarefas */
+    .list-tasks {
+        width: 100%;
+        list-style: none;
+        margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Lista de Tarefas</h1>
+
+  <!-- Caixa de texto para inserir tarefas -->
+  <input type="text" id="tarefaInput" class="input-task" placeholder="Digite sua tarefa">
+  <!-- Botão para adicionar tarefas -->
+  <button class="button-add-task" onclick="adicionarTarefa()">Adicionar Tarefa</button>
+
+  <!-- Lista de tarefas -->
+  <ul id="listaTarefas" class="list-tasks"></ul>
+</div>
+
+<script>
+  
+  var tarefas = []; // Array para armazenar as tarefas
+
+  // Função para adicionar tarefa à lista
+  function adicionarTarefa() {
+    var inputTarefa = document.getElementById("tarefaInput");
+    var tarefa = inputTarefa.value.trim(); // Obtém o valor da caixa de texto
+
+    // Verifica se a caixa de texto não está vazia
+    if (tarefa !== "") {
+      tarefas.push(tarefa); // Adiciona a tarefa ao array de tarefas
+      inputTarefa.value = ""; // Limpa a caixa de texto
+      exibirTarefas(); // Chama a função para exibir as tarefas na página
+    }
+  }
+
+  // Função para exibir tarefas na lista
+  function exibirTarefas() {
+    var listaTarefas = document.getElementById("listaTarefas");
+    listaTarefas.innerHTML = ""; // Limpa a lista de tarefas existente
+
+    // Verifica se não há tarefas na lista
+    if (tarefas.length === 0) {
+      listaTarefas.innerHTML = "<li>Nenhuma tarefa na lista.</li>"; // Exibe uma mensagem quando não há tarefas
+    } else {
+      // Adiciona cada tarefa à lista como um item de lista
+      for (var i = 0; i < tarefas.length; i++) {
+        var li = document.createElement("li"); // Cria um elemento de lista
+        li.appendChild(document.createTextNode(tarefas[i])); // Adiciona o texto da tarefa ao elemento de lista
+        listaTarefas.appendChild(li); // Adiciona o elemento de lista à lista de tarefas na página
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
